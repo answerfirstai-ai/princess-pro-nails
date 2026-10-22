@@ -12,18 +12,22 @@ def footer():
   return f'''<footer class="foot"><div class="wrap"><div class="closing" aria-hidden="true">{bulbs(10)}</div><p class="close-line" data-close aria-live="polite">Hours per Google Maps: {HRS}. Call to confirm.</p>
 <p class="f-name">Princess Pro Nails</p><p>6220 S Vermont Ave, Los Angeles 90044. <a href="{s.tel}">{s.phone}</a>.</p>
 <div class="ctas">{s.call("btn btn-p btn-sm")}{fr("btn btn-l btn-sm")}{s.igb("btn btn-l btn-sm",s.igh)}</div>
-<p class="fine">The vanity images are AI-generated illustrative scenes, not photos of Princess Pro Nails or its work. Services and hours come from public listings; call to confirm. Demo site, © 2026 Princess Pro Nails.</p></div></footer>'''
+<p class="fine">The vanity hero is an AI-generated illustrative scene, not a photo of Princess Pro Nails. Nail set photos are from the salon's own Instagram, @princesspronails. Services and hours come from public listings; call to confirm. Demo site, © 2026 Princess Pro Nails.</p></div></footer>'''
 s.footer=footer
 ALT="Illustrative: a vanity mirror ringed with warm globe bulbs reflecting a Los Angeles street at dusk. AI-generated, not a photo of Princess Pro Nails."
 SV=['Gel nails','Acrylic nails','Manicure',"Men's manicure",'Pedicure','Spa pedicure','Nail art']
 svc=''.join(f'<li><i class="b on" aria-hidden="true"></i>{x}</li>' for x in SV)
-mir=''.join(f'<li class="m m{i}"><div class="mf">{bulbs(6)}<span>Your sets go here</span></div></li>' for i in (1,2,3))
+import sys as _s;_s.path.insert(0,'/workspace/sites/_kit');from social import export,pic as spic
+SP='/workspace/clients/la-salon-princess-pro-nails/assets/social/'
+PPH=[export(SP+f'ig_0{i}.jpg',s.R+'assets/img/ig',f'pp{i}',320) for i in range(1,7)]
+mir=''.join(f'<li class="m pm{i}"><figure class="mf ph">{bulbs(6)}{spic(s.B,"assets/img/ig",d,c+". Photo from the salon\'s own Instagram.",sizes="(max-width:760px) 44vw, 320px")}<figcaption>{c}<small>Photo: @princesspronails</small></figcaption></figure></li>' for i,(d,c) in enumerate(zip(PPH,['Glossy hot-pink long nails', 'Neon swirl tips', 'Gold and leopard accent set', 'Black almond set', 'Matte black coffin set', 'Pink set with jeweled accent']),1))
+_old=''.join(f'<li class="m m{i}"><div class="mf">{bulbs(6)}<span>Your sets go here</span></div></li>' for i in (1,2,3))
 home=f'''<section class="hero" aria-labelledby="h1"><div class="hero-img">{s.hero_pic(ALT)}</div><span class="ill">Illustrative scene · not Princess Pro Nails</span>
 <div class="hero-in"><p class="eyebrow">6220 S Vermont Ave · South LA</p><h1 id="h1">Princess<br>Pro Nails</h1>
 <p class="sub">Nail salon on S Vermont Ave. Gel, acrylic, manicures, pedicures and nail art.</p><div class="ctas">{s.call()}{fr()}{s.igb()}</div></div></section>
 <section class="sec" id="services" aria-labelledby="svc-h"><div class="wrap two"><div><h2 id="svc-h">Services</h2><p class="lede">Per the salon's Fresha listing. Call to confirm, and for pricing.</p><div class="ctas">{s.call()}{fr()}</div></div>
 <div class="mirror-narrow"><ul class="svc">{svc}</ul></div></div></section>
-<section class="sec alt" id="sets" aria-labelledby="sets-h"><div class="wrap"><h2 id="sets-h">Your sets go here</h2><p class="lede">These mirrors wait for the salon's own sets. Recent work is on Instagram.</p><ul class="mirrors">{mir}</ul><div class="ctas">{s.igb("btn btn-l","See "+s.igh)}</div></div></section>
+<section class="sec alt" id="sets" aria-labelledby="sets-h"><div class="wrap"><h2 id="sets-h">Recent sets</h2><p class="lede">From the salon's own Instagram, @princesspronails.</p><ul class="mirrors">{mir}</ul><p class="credit">Photos: @princesspronails</p><div class="ctas">{s.igb("btn btn-l","See "+s.igh)}</div></div></section>
 <section class="sec" aria-labelledby="visit-h"><div class="wrap two"><div><h2 id="visit-h">6220 S Vermont Ave</h2><address>Princess Pro Nails<br>6220 S Vermont Ave<br>Los Angeles, CA 90044</address><div class="ctas">{s.dirb("btn btn-p")}{s.call("btn btn-l")}</div></div>
 <div><ol class="week" aria-label="Weekly hours per Google Maps">{"".join(f'<li data-d="{i}"><i class="b on" aria-hidden="true"></i><b>{d}</b><span>{h}</span></li>' for i,(d,h) in enumerate([("Mon","9-6:30"),("Tue","9-6:30"),("Wed","9-6:30"),("Thu","9-6:30"),("Fri","9-6:30"),("Sat","9-6:30"),("Sun","9-6")]))}</ol><p class="muted">Hours per Google Maps. Call to confirm.</p></div></div></section>'''
 rows=hours_rows([(d,'9 AM - 6:30 PM') for d in ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']]+[('Sunday','9 AM - 6 PM')])
