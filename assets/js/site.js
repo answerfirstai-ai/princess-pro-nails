@@ -7,3 +7,5 @@ const bs=[...document.querySelectorAll('.closing .b')],t=document.querySelector(
 if(h<O){on=0;msg='Closed now. Listed to open at 9 AM. Call to confirm.'}else if(h>=c){on=0;msg='Closed now. Listed to open tomorrow at 9 AM. Call to confirm.'}
 else{const left=c-h;on=Math.max(1,Math.min(bs.length,Math.ceil(left)));const ct=c==18.5?'6:30 PM':'6 PM';msg=`Listed as open until ${ct}. ${on} bulb${on>1?'s':''} left. Call to confirm.`}
 bs.forEach((b,i)=>b.classList.toggle('off',i>=on));t.textContent=msg;})();
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;document.querySelectorAll('details.mnav[open]').forEach(d=>{d.open=false;d.querySelector('summary').focus()})});
+document.querySelectorAll('details.mnav').forEach(d=>{const m=d.querySelector('summary');const u=()=>{m.setAttribute('aria-expanded',d.open);m.setAttribute('aria-label',d.open?'Close menu':'Open menu')};u();d.addEventListener('toggle',u)});
